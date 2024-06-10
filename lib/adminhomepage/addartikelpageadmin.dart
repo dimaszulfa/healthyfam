@@ -84,7 +84,21 @@ class _AddArtikelPageAdminState
                   ),
                 ),
                 onPressed: () {
-                  var data = Article(title: titleController.text, description: descriptionController.text, imageUrl: imageUrlController.text);
+
+            var validate = true;
+                if (titleController.text.isEmpty || titleController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Title tidak boleh kosong")));
+                }else if (descriptionController.text.isEmpty || descriptionController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Deskripsi tidak boleh kosong")));
+                }else if (imageUrlController.text.isEmpty || imageUrlController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Gambar tidak boleh kosong")));
+                }
+
+                if(validate){
+   var data = Article(title: titleController.text, description: descriptionController.text, imageUrl: imageUrlController.text);
                   controller.addArticle(data);
                   showDialog(
                     context: context,
@@ -109,6 +123,8 @@ class _AddArtikelPageAdminState
                       );
                     },
                   );
+                }
+               
                 },
                 child: const Text(
                   'Save',

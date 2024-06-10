@@ -180,7 +180,36 @@ class _AddCatatanKesehatanPageAdminState
                 onPressed: () {
                   // Aksi untuk menavigasi ke halaman selanjutnya
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
-                  var data = MedicalRecord(
+                  var validate = true;
+                if(selectedDate == null){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Tanggal tidak boleh kosong")));
+                  return;
+                }else if (petugasController.text.isEmpty || petugasController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Nama Petugas tidak boleh kosong")));
+                }else if (pasienController.text.isEmpty || pasienController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Nama Pasien tidak boleh kosong")));
+                }else if (keluhanController.text.isEmpty || keluhanController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Keluhan tidak boleh kosong")));
+                }else if (diagnosaController.text.isEmpty || diagnosaController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Diagnosa tidak boleh kosong")));
+                }else if (kategoriController.text.isEmpty || kategoriController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Kategori tidak boleh kosong")));
+                }else if (catatanController.text.isEmpty || catatanController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Catatan tidak boleh kosong")));
+                }else if (obatController.text.isEmpty || obatController.text == ''){
+                  validate = false;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Obat tidak boleh kosong")));
+                }
+
+                if(validate){
+                   var data = MedicalRecord(
                       date: selectedDate,
                       petugasKesehatan: petugasController.text,
                       namaPasien: pasienController.text,
@@ -217,6 +246,9 @@ class _AddCatatanKesehatanPageAdminState
                       );
                     },
                   );
+                }
+
+                 
                 },
                 child: const Text(
                   'Save',
